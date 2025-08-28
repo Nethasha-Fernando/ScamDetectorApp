@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block content %}
+            <h1>Scam Detector</h1>
+            <form action="/result" method="post">
+                <label for="scamtext">Paste your text below: </label>
+                <textarea id="scamtext" name="message" rows="12" cols ="100" required placeholder="Paste your text here..."></textarea><br>
+                <button type="submit">Check for Scam</button>
+            </form>    
+ {% endblock %}           

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="result">
+        <h2>Scan Result</h2>
+        <p>{{ result }}</p>
+        <br>
+        <h3>💬 AI Opinion:</h3>
+        <p>{{ ai_result }}</p>
+        <br>
+        <p><strong>📊 Confidence:</strong> {{ confidence_score }}% chance this is a scam</p>
+        <br>
+        <h3>🔍 Your Message:</h3>
+        <p>{{ message|safe }}</p> <!-- The |safe tells Jinja to render HTML tags like <mark> -->
+        <br>
+        <div>
+            <a href="/" class="back-link">🔁 Try another message</a>
+        </div>
+    </div>    
+{% endblock %}        
+
