@@ -1,10 +1,25 @@
 {% extends "layout.html" %}
-
 {% block content %}
-            <h1>Scam Detector</h1>
-            <form action="/result" method="post">
-                <label for="scamtext">Paste your text below: </label>
-                <textarea id="scamtext" name="message" rows="12" cols ="100" required placeholder="Paste your text here..."></textarea><br>
-                <button type="submit">Check for Scam</button>
-            </form>    
- {% endblock %}           
+<div class="page-center">
+    <div class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        AI-powered detection
+    </div>
+    <h1 class="hero">Spot scams before<br>they spot <em>you</em></h1>
+    <p class="hero-sub">Paste any suspicious message — email, SMS, or chat — and get an instant AI risk assessment.</p>
+    <div class="input-card">
+        <form action="/result" method="post">
+            <label for="scamtext">Message to analyse</label>
+            <textarea id="scamtext" name="message" rows="6" required
+                      placeholder="Paste a suspicious email, text message, or chat here..."></textarea>
+            <div class="submit-row">
+                <span class="submit-hint">Keyword + AI analysis</span>
+                <button type="submit" class="btn-primary">
+                    <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                    Analyse message
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

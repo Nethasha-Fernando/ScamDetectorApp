@@ -1,53 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="initial-scale=1",width=device-width>
-        <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-    </head>
-    <body>
-        <div class="dark-toggle">
-            <button id="modeToggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ScamGuard{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav class="nav">
+    <a href="/" class="nav-logo">
+        <div class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" stroke="#fff" stroke-width="2"/>
+                <path d="M6 12h3l2-3 3 6 2-3h2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
         </div>
+        <span class="nav-name">Authentiq</span>
+    </a>
 
-
-        <div class="container">
-            {% block content %}{% endblock %}
-        </div>
-
-        <script>
-    
-            const body = document.body
-
-            const toggleBtn = document.getElementById('modeToggle')
-
-            function setIcon() {
-                toggleBtn.textContent = body.classList.contains('dark') ? '☀️' : '🌙'
-            }
-
-            function toggleDarkMode() {
-               
-                body.classList.toggle('dark')
-
-                setIcon()
-
-                localStorage.setItem('darkMode', body.classList.contains('dark') ? 'enabled' : 'disabled')
-            }
-
-            if (localStorage.getItem('darkMode') === 'enabled') {
-                body.classList.add('dark')
-                toggleBtn.textContent = '☀️'
-            } else {
-                toggleBtn.textContent = '🌙'
-            }
-
-            setIcon()
-        </script>
-
-
-    </body>
-    
-    </html>
+</nav>
+{% block content %}{% endblock %}
+</body>
+</html>

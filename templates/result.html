@@ -1,21 +1,70 @@
 {% extends "layout.html" %}
-
 {% block content %}
-    <div class="result">
-        <h2>Scan Result</h2>
-        <p>{{ result }}</p>
-        <br>
-        <h3>💬 AI Opinion:</h3>
-        <p>{{ ai_result }}</p>
-        <br>
-        <p><strong>📊 Confidence:</strong> {{ confidence_score }}% chance this is a scam</p>
-        <br>
-        <h3>🔍 Your Message:</h3>
-        <p>{{ message|safe }}</p> <!-- The |safe tells Jinja to render HTML tags like <mark> -->
-        <br>
-        <div>
-            <a href="/" class="back-link">🔁 Try another message</a>
-        </div>
-    </div>    
-{% endblock %}        
+<div class="page-center">
+    <div class="result-wrap">
 
+        <div class="verdict-row">
+            <div class="verdict-icon {% if confidence_score >= 50 %}is-scam{% else %}is-safe{% endif %}">
+                {% if confidence_score >= 50 %}⚠️{% else %}✅{% endif %}
+            </div>
+            <div>
+                <div class="verdict-title">
+                    {% if confidence_score >= 50 %}Likely a scam{% else %}Looks safe{% endif %}
+                </div>
+                <div class="verdict-sub">Analysed just now</div>
+            </div>
+            <span class="verdict-pill {% if confidence_score >= 50 %}is-scam{% else %}is-safe{% endif %}">
+            {% if confidence_score >= 50 %}HIGH RISK{% else %}LOW RISK{% endif %}
+        </span>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">Risk score</div>
+                <div class="stat-num {% if confidence_score >= 50 %}is-scam{% else %}is-safe{% endif %}">
+                    {{ confidence_score }}%
+                </div>
+                <div class="meter-track">
+                    <div class="meter-fill {% if confidence_score >= 50 %}is-scam{% else %}is-safe{% endif %}"
+                         style="width: {{ confidence_score }}%"></div>
+                </div>
+                <div class="meter-labels"><span>Safe</span><span>Danger</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Detection</div>
+                <div class="stat-num {% if confidence_score >= 50 %}is-scam{% else %}is-safe{% endif %}"
+                     style="font-size:16px; margin-top:4px; line-height:1.4">
+                    {% if confidence_score >= 50 %}Scam{% else %}Safe{% endif %}
+                </div>
+                <div class="stat-sub">Keyword match</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">AI opinion</div>
+                <div class="stat-num neutral" style="font-size:16px; margin-top:4px; line-height:1.4">Active</div>
+                <div class="stat-sub">Analysis complete</div>
+            </div>
+        </div>
+
+        <div class="result-section">
+            <div class="section-label">Detection result</div>
+            <p style="font-size:14px; color:rgba(255,255,255,0.6); line-height:1.6">{{ result }}</p>
+        </div>
+
+        <div class="result-section">
+            <div class="section-label">AI analysis</div>
+            <p class="ai-text">{{ ai_result }}</p>
+        </div>
+
+        <div class="result-section">
+            <div class="section-label">Your message</div>
+            <p class="message-text">{{ message|safe }}</p>
+        </div>
+
+        <a href="/" class="btn-ghost">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Check another message
+        </a>
+
+    </div>
+</div>
+{% endblock %}
